@@ -17,10 +17,10 @@ namespace ldap_with_netcore
 
         public static void UserList (string objectDN, string password)
         {
+            LdapConnection conn = new LdapConnection ();
 
             try
             {
-                LdapConnection conn = new LdapConnection ();
                 Console.WriteLine ("Connecting to " + ldapHost);
                 // Connect to the LDAP server using the host and the port
                 // ldap//<host>:<port>
@@ -74,6 +74,10 @@ namespace ldap_with_netcore
                 Console.WriteLine ("Error: " + e.Message);
                 return;
             }
+            finally
+            {
+                conn.Disconnect ();
+            }
 
         }
 
@@ -121,9 +125,11 @@ namespace ldap_with_netcore
             {
                 Console.Error.WriteLine ("Error: " + e.ToString ());
             }
-
-            // disconnect with the server
-            conn.Disconnect ();
+            finally
+            {
+                // disconnect with the server
+                conn.Disconnect ();
+            }
 
             return false;
 

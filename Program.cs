@@ -13,7 +13,7 @@ namespace ldap_with_netcore
             {
 
                 case 1:
-                    NovellLdapConnectionHelper.UserList ("employeeNumber=100,ou=users,o=Company", "password123");
+                    NovellLdapConnectionHelper.UserList ("employeeNumber=100,ou=users,o=Company", "password123", "ou=people,dc=wdgautomation,dc=com");
                     break;
                 case 2:
                     // Method #2: Using Microsoft.Windows.Compatibility

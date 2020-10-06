@@ -12,10 +12,8 @@ namespace ldap_with_netcore
         static int ldapVersion = LdapConnection.LdapV3;
         static string loginDN = "uid=admin, ou=system";
         static string adminPassword = "secret";
-        static string searchBase = "ou=users,o=Company";
-        static string searchFilter = "objectClass=inetOrgPerson";
 
-        public static void UserList (string objectDN, string password)
+        public static void UserList (string objectDN, string password, string searchBase)
         {
             LdapConnection conn = new LdapConnection ();
 
@@ -28,6 +26,7 @@ namespace ldap_with_netcore
                 conn.Bind (objectDN, password);
 
                 string[] requiredAttributes = { "cn", "sn", "uid", "userPassword" };
+                string searchFilter = "objectClass=inetOrgPerson";
 
                 ILdapSearchResults lsc = conn.Search (searchBase,
                     LdapConnection.ScopeSub,
